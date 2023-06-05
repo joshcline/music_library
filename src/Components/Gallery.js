@@ -1,8 +1,10 @@
+import { useContext } from 'react'
+import { DataContext } from '../Contexts/DataContext'
 import GalleryItem from './GalleryItem'
 
-function Gallery({ data }) {
-    //makes a gallery item for each item in the data array from i tunes
-    const display = data.map((item,i) => {
+function Gallery() {
+    const data = useContext(DataContext)
+    const display = data.map((item, i) => {
         return <GalleryItem key={i} item={item} />
     })
 
