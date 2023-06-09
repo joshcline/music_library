@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import React, { Fragment } from 'react'
 import Gallery from './Components/Gallery.js'
 import SearchBar from './Components/SearchBar.js'
 import { DataContext } from './Contexts/DataContext.js'
@@ -41,12 +40,12 @@ function App(){
             <Router>
                 <Routes>
                     <Route path='/' element={
-                        <Fragment>
+                        <>
                             <SearchBar handleSearch={handleSearch} />          
                             <DataContext.Provider value={data}>
                                 <Gallery />
                             </DataContext.Provider>
-                        </Fragment>
+                        </>
                     } />
                     <Route path='/album/:id' element={<AlbumView />} />
                     <Route path='/artist/:id' element={<ArtistView />} />

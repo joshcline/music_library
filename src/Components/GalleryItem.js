@@ -53,7 +53,6 @@ function GalleryItem({ item }) {
         )
     }
 
-    //uses clicks to alternate between detail and simple views
     return (
         <div onClick={() => setView(!view)}
         style={{'display': 'inline-block'}}>
