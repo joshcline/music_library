@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Gallery from './Components/Gallery.js'
 import SearchBar from './Components/SearchBar.js'
-import { DataContext } from './Contexts/DataContext.js'
 import AlbumView from './Components/AlbumView.js'
 import ArtistView from './Components/ArtistView.js'
 
@@ -13,14 +12,14 @@ function App(){
 
     //gets the data from itunes everytime the search is changed
     useEffect(() => {
-        const fetchData= async () => {
+        const fetchData = async () => {
             const API_URL = `https://itunes.apple.com/search?term=${encodeURI(search)}`
             const response= await fetch(API_URL)
             const data= await response.json()
             console.log(data)
-            if(data.results.length>0){
+            if(data.results.length > 0){
                 setData(data.results)
-            }else{
+            } else {
                 setMessage('not found')
             }
         }
@@ -37,20 +36,18 @@ function App(){
     return (
         <div>
         {message}
-            <Router>
-                <Routes>
-                    <Route path='/' element={
-                        <>
-                            <SearchBar handleSearch={handleSearch} />          
-                            <DataContext.Provider value={data}>
-                                <Gallery />
-                            </DataContext.Provider>
-                        </>
-                    } />
-                    <Route path='/album/:id' element={<AlbumView />} />
-                    <Route path='/artist/:id' element={<ArtistView />} />
-                </Routes>    
-            </Router>
+        <Router>
+            <Routes>
+                <Route path='/' element={
+                    <>
+                    <SearchBar handleSearch={handleSearch} />          
+                    <Gallery data={data}/>   
+                    </>
+                } />
+                <Route path='/album/:id' element={<AlbumView />} />
+                <Route path='/artist/:id' element={<ArtistView />} />
+            </Routes>    
+        </Router>
         </div>
     )
 }

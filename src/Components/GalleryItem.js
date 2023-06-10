@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function GalleryItem({ item }) {
     let [view, setView] = useState(false)
 
-    //css for the information
+    //CSS for the information
     const simpleStyle = {
         'width': '25vw',
         'height': '20vh',
@@ -23,7 +23,7 @@ function GalleryItem({ item }) {
         'color': 'yellow'
     }
 
-        //sets up a thumbnail type display
+        //Thumbnail type display
     const simpleView = () => {
         return (
             <div style={simpleStyle}>
@@ -32,7 +32,7 @@ function GalleryItem({ item }) {
             </div>
         )
     }
-        // sets up more detailed view
+        //More detailed view
     const detailView = () => {
         return (
             <div style={detailStyle}>
