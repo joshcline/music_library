@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+
 function GalleryItem({ item }) {
     let [view, setView] = useState(false)
 
-    //CSS for the information
+    //css for the information
     const simpleStyle = {
         'width': '25vw',
         'height': '20vh',
@@ -23,7 +24,7 @@ function GalleryItem({ item }) {
         'color': 'yellow'
     }
 
-        //Thumbnail type display
+        //sets up a thumbnail type display
     const simpleView = () => {
         return (
             <div style={simpleStyle}>
@@ -32,7 +33,7 @@ function GalleryItem({ item }) {
             </div>
         )
     }
-        //More detailed view
+        // sets up more detailed view
     const detailView = () => {
         return (
             <div style={detailStyle}>
@@ -43,8 +44,8 @@ function GalleryItem({ item }) {
                     </Link>
                 </h3>
                 <h3>
-                    <Link to={`/album/${item.collectionId}`} >
-                    {item.collectionName}
+                    <Link to={`/album/${item.collectionId}`}>
+                        {item.collectionName}
                     </Link>
                 </h3>
                 <h4>{item.primaryGenreName}</h4>
@@ -52,7 +53,9 @@ function GalleryItem({ item }) {
             </div>
         )
     }
+        
 
+    //uses clicks to alternate between detail and simple views
     return (
         <div onClick={() => setView(!view)}
         style={{'display': 'inline-block'}}>

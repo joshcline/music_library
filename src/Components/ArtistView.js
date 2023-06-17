@@ -1,50 +1,37 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import NavButtons from './NavButtons'
 
 function ArtistView() {
-  const { id } = useParams();
-  const [artistData, setArtistData] = useState([]);
-  
+    const { id } = useParams()
+    const [artistData, setArtistData ] = useState([])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const API_URL = `http://localhost:4000/album/${id}`; // url to get artist data
-      const response = await fetch(API_URL);
-      const data = await response.json();
-      const albums = data.results.filter(item => item.collectionType === 'Album');
-      console.log(albums);
-      setArtistData(albums);
-    }
+    useEffect(() => {
+        const fetchData = async () => {
+            const API_URL = `http://localhost:4000/album/${id}`
+            const response = await fetch(API_URL)
+            const data = await response.json()
+            const albums = data.results.filter(item => item.collectionType === 'Album')
+            setArtistData(albums)
+        }
 
-    fetchData();
-  }, [id]);
+        fetchData()
+    }, [id])
 
-  const navigate = useNavigate();
+    const display = artistData && artistData.map(album => {
+        return (
+            <div key={album.collectionId}>
+                <p>{album.collectionName}</p>
+            </div>
+        )
+    })
 
-  const navButtons = () => {
     return (
-      <div>
-        <button onClick={() => navigate(-1)}>Back</button>
-        |
-        <button onClick={() => navigate('/')}>Home</button>
-      </div>
+        <div>
+            {NavButtons}
+            {display}
+        </div>
     )
-  }
-
-  const display = artistData && artistData.map(album =>{
-    return (
-      <div key={album.collectionId}>
-        <p>{album.collectionName}</p>
-      </div>
-    )
-  })
-
-  return (
-    <div>
-      {navButtons()}
-      {display}
-    </div>
-  )
 }
 
 export default ArtistView

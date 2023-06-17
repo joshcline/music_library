@@ -1,11 +1,16 @@
 import GalleryItem from './GalleryItem'
 
+
 function Gallery({ data }) {
-    const display = data.map((item, i) => {
+
+    data = data.result.read
+
+    const display = data.map((item,i) => {
+        console.log(data.map)
         return <GalleryItem key={i} item={item} />
     })
 
-    return (
+    return(
         <div>
             {display}
         </div>
